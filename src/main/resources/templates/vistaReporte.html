@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Reporte | Propietarios</title>
+</head>
+
+<body>
+    <h6>Hola Mundo</h6>
+    <!-- Elemento para mostrar tablas -->
+    <table class="table table-dark table-striped-columns">
+        <thead>
+            <!-- Fila de encabezados -->
+            <tr>
+                <!-- Columnas de encabezados -->
+                <th>ID</th>
+                <th>Nombre</th>
+                <th>Apellido</th>
+                <th>Cédula</th>
+                <th>Editar</th>
+                <th>Borrar</th>
+            </tr>
+        </thead>
+        <!-- Cuerpo de la tabla -->
+        <tbody>
+            <!-- Iteración sobre propietarios -->
+            <tr th:each="propietario:${propietarios}">
+                <!-- Columnas de datos -->
+                <td th:text="${propietario.id}"></td>
+                <td th:text="${propietario.nombre}"></td>
+                <td th:text="${propietario.apellido}"></td>
+                <td th:text="${propietario.cedula}"></td>
+                <td>
+                    <form th:action="@{/propietarios/buscarPorID/{id}(id=${propietario.id})}" th:method="GET">
+                        <input type="submit" value="Editar">
+                    </form>
+                </td>
+                <td>
+                    <form th:action="@{/propietarios/borrar/{id}(id=${propietario.id})}" th:method="DELETE">
+                        <input type="submit"  value="Borrar">
+                    </form>
+                </td>
+            </tr>
+        </tbody>
+    </table>
+    <a th:href="@{/propietarios/nuevo}">Agregar nuevo propietario</a>
+</body>
+
+</html>
